@@ -12,8 +12,8 @@ public class Song {
     private int year;
     private String genre;
     private HobbyTracker hobbyTracker;
-    private MajorTracker majorTracker;
-    private RegionTracker regionTracker;
+    //private MajorTracker majorTracker;
+    //private RegionTracker regionTracker;
     
     public Song() {
         

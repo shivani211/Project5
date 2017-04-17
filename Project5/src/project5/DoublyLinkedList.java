@@ -24,6 +24,12 @@ public class DoublyLinkedList<T> {
     }
     
     /**
+     * Prevents StackOverflowErros when creating a Node
+     * @param bool Any boolean
+     */
+    private DoublyLinkedList(boolean bool) {}
+    
+    /**
      * Returns the size of the DoublyLinkedList
      * 
      * @return The size of the DoublyLinkedList
@@ -75,6 +81,7 @@ public class DoublyLinkedList<T> {
         }
         Node<T> newNode = new Node<T>(data);
         newNode.addAfter(curr);
+        size++;
     }
     
     /**
@@ -87,6 +94,7 @@ public class DoublyLinkedList<T> {
         if (size == 0) {
             throw new IllegalStateException("DoublyLinkedList is empty");
         }
+        size--;
         return head.next().remove();
     }
     
@@ -100,6 +108,7 @@ public class DoublyLinkedList<T> {
         if (size == 0) {
             throw new IllegalStateException("DoublyLinkedList is empty");
         }
+        size--;
         return tail.previous().remove();
     }
     
@@ -112,12 +121,14 @@ public class DoublyLinkedList<T> {
      * @return Whether the Node was removed
      */
     public boolean remove(T data) {
-        Node<T> curr = head;
-        while(curr != tail) {
+        Node<T> curr = head.next();
+        while (curr != tail) {
             if (curr.data().equals(data)) {
+                size--;
                 curr.remove();
                 return true;
             }
+            curr = curr.next();
         }
         return false;
     }
@@ -142,6 +153,7 @@ public class DoublyLinkedList<T> {
         for (int i = 0; i < index; i++) {
             curr = curr.next();
         }
+        size--;
         return curr.remove();
     }
     
@@ -189,11 +201,12 @@ public class DoublyLinkedList<T> {
      * @return Whether a Node contains the data
      */
     public boolean contains(T data) {
-        Node<T> curr = head;
-        while (curr != null) {
+        Node<T> curr = head.next();
+        while (curr != tail) {
             if (curr.data().equals(data)) {
                 return true;
             }
+            curr = curr.next();
         }
         return false;
     }
@@ -217,7 +230,8 @@ public class DoublyLinkedList<T> {
          * @param nodeData The data to store
          */
         public Node(T nodeData) {
-            data = nodeData;
+            super(false);
+            this.setData(nodeData);
             next = null;
             prev = null;
         }
