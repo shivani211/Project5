@@ -1,13 +1,17 @@
 package project5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * A linked chain of Nodes to store data
  * Contains sentinel nodes
  * 
  * @author Truman Heberle trumanh
  * @version 4.15.2017
+ * @param <T> The type of data stored in the list
  */
-public class DoublyLinkedList<T> {
+public class DoublyLinkedList<T> implements Iterable<T> {
     private int size;
     private Node<T> head;
     private Node<T> tail;
@@ -211,6 +215,11 @@ public class DoublyLinkedList<T> {
         return false;
     }
     
+    @Override
+    public Iterator<T> iterator() {
+        return new ListIterator<T>();
+    }
+    
     /**
      * Stores data in a Node
      * 
@@ -312,5 +321,40 @@ public class DoublyLinkedList<T> {
             currentNode.setNext(this);
             this.setPrevious(currentNode);
         }
+    }
+
+    /**
+     * Allows iteration through the list
+     * 
+     * @author Truman Heberle trumanh
+     * @version 4.16.2017
+     * @param <T> The type of data in the list
+     */
+    @SuppressWarnings("hiding")
+    private class ListIterator<T> extends DoublyLinkedList<T> implements Iterator<T> {
+        private DoublyLinkedList<T>.Node<T> curr;
+        
+        /**
+         * Creates a new Iterator
+         */
+        @SuppressWarnings("unchecked")
+        public ListIterator() {
+            curr = (DoublyLinkedList<T>.Node<T>) head;
+        }
+        
+        @Override
+        public boolean hasNext() {
+            return curr.next() != tail;
+        }
+
+        @Override
+        public T next() {
+            if (!this.hasNext()) {
+                throw new NoSuchElementException("No more elements to progress");
+            }
+            curr = curr.next();
+            return curr.data();
+        }
+        
     }
 }

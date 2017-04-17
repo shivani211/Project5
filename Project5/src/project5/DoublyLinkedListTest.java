@@ -1,5 +1,7 @@
 package project5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import student.TestCase;
 
 /**
@@ -18,6 +20,9 @@ public class DoublyLinkedListTest extends TestCase {
         list = new DoublyLinkedList<String>();
     }
     
+    /**
+     * Tests the size method
+     */
     public void testSize() {
         assertEquals(0, list.size());
         list.addToFront("a");
@@ -26,6 +31,9 @@ public class DoublyLinkedListTest extends TestCase {
         assertEquals(0, list.size());
     }
     
+    /**
+     * Tests the addToBack method
+     */
     public void testAddToBack() {
         list.addToBack("Front");
         list.addToBack("Back");
@@ -41,6 +49,9 @@ public class DoublyLinkedListTest extends TestCase {
         assertEquals("back", list.getFront());
     }
     
+    /**
+     * tests the addToFront method
+     */
     public void testAddToFront() {
         list.addToFront("Back");
         list.addToFront("Front");
@@ -56,6 +67,10 @@ public class DoublyLinkedListTest extends TestCase {
         assertEquals("back", list.getFront());
     }
     
+    /**
+     * Tests the add method
+     * Tests for exception when index is illegal
+     */
     public void testAdd() {
         list.add(0, "0");
         assertEquals("0", list.getFront());
@@ -99,6 +114,10 @@ public class DoublyLinkedListTest extends TestCase {
         assertEquals(4, list.size());
     }
     
+    /**
+     * Tests the removeFront method
+     * Tests exception when empty
+     */
     public void testRemoveFront() {
         list.addToFront("0");
         list.addToFront("1");
@@ -107,8 +126,24 @@ public class DoublyLinkedListTest extends TestCase {
         assertEquals("3", list.removeFront());
         assertEquals("2", list.getFront());
         assertEquals(3, list.size());
+        
+        list = new DoublyLinkedList<String>();
+        Exception ex = null;
+        String item = null;
+        try {
+            item = list.removeFront();
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        assertNull(item);
+        assertTrue(ex instanceof IllegalStateException);
     }
     
+    /**
+     * Tests the removeBack method
+     * Tests exception when empty
+     */
     public void testRemoveBack() {
         list.addToBack("0");
         list.addToBack("1");
@@ -117,8 +152,26 @@ public class DoublyLinkedListTest extends TestCase {
         assertEquals("3", list.removeBack());
         assertEquals("2", list.getBack());
         assertEquals(3, list.size());
+        
+        list = new DoublyLinkedList<String>();
+        Exception ex = null;
+        String item = null;
+        try {
+            item = list.removeBack();
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        assertNull(item);
+        assertTrue(ex instanceof IllegalStateException);
     }
     
+    /**
+     * Tests the remove method (by index)
+     * Tests for IllegalStateException when empty
+     * Tests for IndexOutOfBoundsException when
+     * index is illegal
+     */
     public void testRemoveIndex() {
         Exception ex = null;
         String item = null;
@@ -175,6 +228,10 @@ public class DoublyLinkedListTest extends TestCase {
         assertEquals(1, list.size());
     }
     
+    /**
+     * Tests the remove method (by data)
+     * Test a boolean is returned
+     */
     public void testRemoveItem() {
         assertFalse(list.remove("data"));
         
@@ -195,6 +252,10 @@ public class DoublyLinkedListTest extends TestCase {
         assertTrue(list.contains("data"));
     }
     
+    /**
+     * Tests the get method
+     * Tests exception when index is illegal
+     */
     public void testGet() {
         list.addToFront("Front");
         assertEquals("Front", list.getEntry(0));
@@ -231,6 +292,9 @@ public class DoublyLinkedListTest extends TestCase {
         assertTrue(ex instanceof IndexOutOfBoundsException);
     }
     
+    /**
+     * Tests the contains method
+     */
     public void testContains() {
         assertFalse(list.contains("notinList"));
         
@@ -247,5 +311,32 @@ public class DoublyLinkedListTest extends TestCase {
         assertTrue(list.contains("back"));
         assertFalse(list.contains("newBack"));
         assertFalse(list.contains("notinList"));
+    }
+    
+    /**
+     * Tests the iterator method
+     * to make sure a usable iterator is returned
+     */
+    public void testIterator() {
+        for (int i = 0; i < 20; i++) {
+            list.addToBack("String" + i);
+        }
+        Iterator<String> iter = list.iterator();
+        for (int i = 0; i < 20; i++) {
+            assertTrue(iter.hasNext());
+            assertEquals("String" + i, iter.next());
+        }
+        
+        assertFalse(iter.hasNext());
+        Exception ex = null;
+        String next = null;
+        try {
+            next = iter.next();
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        assertNull(next);
+        assertTrue(ex instanceof NoSuchElementException);
     }
 }
