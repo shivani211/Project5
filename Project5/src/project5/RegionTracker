@@ -1,0 +1,31 @@
+package project5;
+
+/**
+ * Stores information regarding a song's
+ * like and heard stats based on region
+ * 
+ * @author Truman Heberle trumanh
+ * @version 4.17.2017
+ */
+public class RegionTracker {
+    private int northeastUSHeard;
+    private int northeastUSLiked;
+    private int southeastUSHeard;
+    private int southeastUSLiked;
+    private int theRestOfUSHeard;
+    private int theRestOfUSLiked;
+    private int outsideTheUSHeard;
+    private int outsideTheUSLiked;
+    private int totalNortheastUS;
+    private int totalSoutheastUS;
+    private int totalTheRestOfUs;
+    private int totalOutsideTheUS;
+
+    public RegionTracker(SinglyLinkedList<Person>) {
+        
+    }
+    
+    public int getPercentage(RegionEnum, String) {
+    
+    }
+}
