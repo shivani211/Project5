@@ -17,7 +17,11 @@ public class HobbyTracker {
     private int musicHeard;
     private int musicLiked;
     
-    public HobbyTracker() {
+    public HobbyTracker(SinglyLinkedList<Person>) {
+        
+    }
+    
+    public int getPercentage(HobbyEnum, String) {
         
     }
 }
