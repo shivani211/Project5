@@ -1,0 +1,31 @@
+package project5;
+
+/**
+ * Stores information regarding a song's
+ * like and heard stats based on major
+ * 
+ * @author Truman Heberle trumanh
+ * @version 4.18.2017
+ */
+public class HobbyTracker {
+    private int computerScienceHeard;
+    private int computerScienceLiked;
+    private int otherEngineeringHeard;
+    private int otherEngineeringLiked;
+    private int mathOrCMDAHeard;
+    private int mathOrCMDALiked;
+    private int otherHeard;
+    private int otherLiked;
+    private int totalComputerScience;
+    private int totalOtherEngineering;
+    private int totalMathOrCMDA;
+    private int Other;
+    
+    public HobbyTracker(SinglyLinkedList<Person>) {
+        
+    }
+    
+    public int getPercentage(MajorEnum, String) {
+    
+    }
+}
