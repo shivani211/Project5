@@ -15,7 +15,26 @@ public class Song {
     //private MajorTracker majorTracker;
     //private RegionTracker regionTracker;
     
-    public Song() {
-        
+    public Song(String title1, String artist1, int year1, String genre1) {
+        title = title1;
+        artist = artist1;
+        year = year1;
+        genre = genre1;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public String getArtist() {
+        return artist;
+    }
+    
+    public int getYear() {
+        return year;
+    }
+    
+    public String getGenre() {
+        return genre;
     }
 }
